@@ -15,21 +15,7 @@ class Database:
         with self.connector as cursor:
             print(cursor.execute("SELECT * FROM tg_users").fetchall())
 
-    def add_user(self, user_id: int, username: str, user_type: str) -> None:
-        """Добавление пользователя в БД"""
-        with self.connector as cursor:
-            cursor.execute("""UPDATE tg_users SET user_type=$1""", [user_type]) if cursor.execute(
-                """SELECT * FROM tg_users WHERE tg_id=$1""", [user_id]).fetchone() else cursor.execute(
-                """INSERT INTO tg_users(tg_id, username, user_type) VALUES($1, $2, $3)""", (user_id,
-                                                                                            username, user_type))
-
-    def get_user_type(self, user_id) -> str:
-        """Функция для получения 'типа пользователя'"""
-        with self.connector as cursor:
-            record = cursor.execute("""SELECT user_type FROM tg_users WHERE tg_id=$1""", (user_id,)).fetchone()
-        return record
-
-    def get_info_about_user(self, user_id, forward=1):
+    async def get_info_about_user(self, user_id, forward=1):
         with self.connector as cursor:
             cursor.execute(f"""
                             UPDATE tg_users
@@ -41,7 +27,7 @@ class Database:
                 WHERE id = (SELECT tg_users.user_id FROM tg_users WHERE tg_id = $1);""", (user_id,)).fetchone()
         return result
 
-    def get_info_about_group(self, user_id, forward=1):
+    async def get_info_about_group(self, user_id, forward=1):
         with self.connector as cursor:
             cursor.execute(f"""
                             UPDATE tg_users
