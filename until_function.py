@@ -2,9 +2,9 @@ async def form_user_info(data: list | tuple):
     return f'<b>Информация о пользователе ВК</b>:\n' \
            f'<b>ID пользователя</b>: {data[0]}\n' \
            f'<b>Фамилия имя</b>: {data[1]} {data[2]}\n' \
-           f'<b>Телефонный номер</b>:\t{data[3] if not (data[3] is None or data[3] == "None") else "Телефонный номер не указан"}\n' \
-           f'<b>Почта</b>: {data[4] if data[4] else "Почта не указана"}\n' \
-           f'<b>Город</b>: {data[5] if data[5] else "Город не указан"}\n' \
+           f'<b>Телефонный номер</b>:\t{data[3] if not (data[3] is None or data[3] == "None") else "Не указан"}\n' \
+           f'<b>Почта</b>: {data[4] if data[4] else "Не указана"}\n' \
+           f'<b>Город</b>: {data[5] if data[5] else "Не указан"}\n' \
            f'<b>Статус</b>: {data[6]}'
 
 

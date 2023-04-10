@@ -11,6 +11,11 @@ class Database:
         """Подключение к БД"""
         self.connector = sqlite3.connect(path + FILENAME)
 
+    async def add_user(self, user_id: int, username: str) -> None:
+        """Добавление пользователя в БД"""
+        with self.connector as cursor:
+            cursor.execute("""INSERT INTO tg_users(tg_id, username) VALUES($1, $2)""", (user_id, username))
+
     def test(self):
         with self.connector as cursor:
             print(cursor.execute("SELECT * FROM tg_users").fetchall())

@@ -14,6 +14,7 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start'])
 async def process_command_start(message: types.Message):
     """Обработчик когда пользователь начинает начать"""
+    await database.add_user(message.from_user.id, message.from_user.username)
     await message.reply('Начало работы', reply_markup=await main_keyboard())
 
 
