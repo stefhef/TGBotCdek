@@ -5,8 +5,10 @@ from database import Database
 from keyboards import main_keyboard
 from until_function import form_user_info, form_group_info
 import logging
+import datetime
 
-logging.basicConfig(level=logging.INFO, filename="bot.log", filemode="w",
+logging.basicConfig(level=logging.INFO, filename=f"{datetime.datetime.now().strftime('%Y.%m.%d_%H.%M')}_bot.log",
+                    filemode="w",
                     format="%(asctime)s %(levelname)s %(message)s")
 database = Database()
 
