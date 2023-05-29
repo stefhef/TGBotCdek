@@ -1,8 +1,9 @@
+"""Модуль с функцией формирования главной клавиатурой"""
 from aiogram.types.inline_keyboard import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 async def get_keyboard():
-    """Возвращает клавиатуру о боте"""
+    """Формирует и возвращает клавиатуру о боте"""
     keyboard = InlineKeyboardMarkup()
 
     first_button = InlineKeyboardButton(f"1) Следующая группа", callback_data="next_group")

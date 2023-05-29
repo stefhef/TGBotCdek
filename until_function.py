@@ -1,4 +1,9 @@
+"""Модуль с вспомогательными функциями"""
+import logging
+
+
 async def form_user_info(data: list | tuple):
+    """Формируется информация о пользователе в нужном виде"""
     return f'<b>Информация о пользователе ВК</b>:\n' \
            f'<b>ID пользователя</b>: {data[0]}\n' \
            f'<b>Фамилия имя</b>: {data[1]} {data[2]}\n' \
@@ -9,16 +14,19 @@ async def form_user_info(data: list | tuple):
 
 
 async def form_group_info(data: list | tuple):
+    """Формируется информация о группе в нужном виде"""
+    logging.debug("Формируется информация о группу")
     contacts = "\n"
     if data != "None":
-        for number, item, in enumerate(data[8].replace("[", "").split("]")[:-2], 1):
+        for number, item, in enumerate(data[8].replace(", [", "").replace("[", "").split("]")[:-2], 1):
             contacts += f"<b>Контакт номер {number}:</b>\n"
             item = item.split(", ")
             contacts += f"<b>ID</b>: {item[0] if item[0] != 'None' else 'Не указан'}\n" \
                         f"<b>Должность</b>: {item[1] if item[1] != 'None' else 'Не указана'}\n" \
                         f"<b>Номер телефона</b>: {item[2] if item[2] != 'None' else 'Не указан'}\n" \
                         f"<b>Почта</b>: {item[3] if item[3] != 'None' else 'Не указана'}\n\n"
-    return f'<b>ID группы</b>: {data[0]}\n' \
+    return f'<b>Информация о группе ВК</b>:\n' \
+           f'<b>ID группы</b>: {data[0]}\n' \
            f'<b>Название</b>: {data[1]}\n' \
            f'<b>ScreenName</b>: {data[2]}\n' \
            f'<b>Закрыта ли</b>: {"Да" if data[3] else "Нет"}\n' \
